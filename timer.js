@@ -18,10 +18,12 @@ function clock() {
     var sMins ="" + ((iMins > 9) ? iMins : "0" + iMins);
 	document.getElementById("timer").value = sMins+":"+sSecs;
 	alert(sMins+":"+sSecs);
+	setTimeout(function () {clock()}, 1000)
 }
 
 
 document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('timer').addEventListener('click', clickHandler);
+	//alert("Hello world");
 	clock();
   });
