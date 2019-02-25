@@ -1,10 +1,18 @@
+var urls = localStorage.getItem("savedURL");
+chrome.tabs.query({'active': true, 'currentWindow': true},
+    function(tabs){
+    urls = tabs[0].url;
+});
 
-startday = new Date();
-clockStart = startday.getTime();
+if (localStorage.getItem("savedTime") === null || localStorage.getItem("savedURL") != urls) {
+	startday = new Date();
+	clockStart = startday.getTime();
+	localStorage.setItem("savedTime", clockStart.toString());
+} else {
+	clockStart = parseInt(localStorage.getItem("savedTime"))
 
-function clickHandler(e) {
-	setTimeout(handler, 1000);
-  }
+};
+localStorage.setItem("savedURL", urls);
 
 function initStopwatch() {
 	var currentTime = new Date();
@@ -17,13 +25,21 @@ function clock() {
 	var sSecs ="" + ((iSecs > 9) ? iSecs : "0" + iSecs);
     var sMins ="" + ((iMins > 9) ? iMins : "0" + iMins);
 	document.getElementById("timer").innerHTML = sMins+":"+sSecs;
+	//document.getElementById("timer").innerHTML = tSecs
+	document.getElementById("test").innerHTML = urls;
+	//document.getElementById("test2").innerHTML = localStorage.getItem("savedURL");
+	//time = time+1
+	//localStorage.setItem("savedTime", time.toString())
 	//alert(sMins+":"+sSecs);
 	setTimeout(function () {clock()}, 1000)
 }
 
+function allTask() {
+	clock()
+}
 
 document.addEventListener('DOMContentLoaded', function () {
-	document.getElementById('timer').addEventListener('click', clickHandler);
+	//document.getElementById('timer').addEventListener('click', clickHandler);
 	//alert("Hello world");
-	clock();
+	allTask();
   });
