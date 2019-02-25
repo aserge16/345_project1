@@ -16,8 +16,8 @@ function clock() {
 	var iMins = Math.round((tSecs-30)/60);
 	var sSecs ="" + ((iSecs > 9) ? iSecs : "0" + iSecs);
     var sMins ="" + ((iMins > 9) ? iMins : "0" + iMins);
-	document.getElementById("timer").value = sMins+":"+sSecs;
-	alert(sMins+":"+sSecs);
+	document.getElementById("timer").innerHTML = sMins+":"+sSecs;
+	//alert(sMins+":"+sSecs);
 	setTimeout(function () {clock()}, 1000)
 }
 
