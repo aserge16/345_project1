@@ -1,24 +1,38 @@
-var urls = localStorage.getItem("savedURL");
-chrome.tabs.query({'active': true, 'currentWindow': true},
-    function(tabs){
-    urls = tabs[0].url;
-});
+//if (localStorage.getItem("savedTime") === null || localStorage.getItem("savedURL") != urls) {
+//	startday = new Date();
+//	clockStart = startday.getTime();
+//	localStorage.setItem("savedTime", clockStart.toString());
+//} else {
+//	clockStart = parseInt(localStorage.getItem("savedTime"))
+//};
 
-if (localStorage.getItem("savedTime") === null || localStorage.getItem("savedURL") != urls) {
-	startday = new Date();
-	clockStart = startday.getTime();
-	localStorage.setItem("savedTime", clockStart.toString());
-} else {
-	clockStart = parseInt(localStorage.getItem("savedTime"))
+var urls;
 
-};
-localStorage.setItem("savedURL", urls);
+function reset_clock() {
+	chrome.tabs.query({'active': true, 'currentWindow': true},
+	function(tabs){
+		urls = tabs[0].url;
+		});
+	if (urls !== localStorage.getItem("savedURL")) {
+		startday = new Date();
+		clockStart = startday.getTime();
+		localStorage.setItem("savedTime", clockStart.toString());
+		localStorage.setItem("savedURL", urls);
+	} else {
+		clockStart = parseInt(localStorage.getItem("savedTime"));
+	}
+}
+
 
 function initStopwatch() {
 	var currentTime = new Date();
+	clockStart = localStorage.getItem("savedTime");
 	return((currentTime.getTime() - clockStart)/1000);
 	}
+
+
 function clock() {
+	reset_clock();
 	var tSecs = Math.round(initStopwatch());
 	var iSecs = tSecs%60;
 	var iMins = Math.round((tSecs-30)/60);
@@ -34,12 +48,16 @@ function clock() {
 	setTimeout(function () {clock()}, 1000)
 }
 
-function allTask() {
-	clock()
+
+function allTasks() {
+	clock();
 }
+
 
 document.addEventListener('DOMContentLoaded', function () {
 	//document.getElementById('timer').addEventListener('click', clickHandler);
 	//alert("Hello world");
-	allTask();
+	//reset_clock();
+	allTasks();
   });
+
