@@ -7,26 +7,39 @@
 //};
 
 var urls;
-
+var lastTimestamp;
+var lastURL;
 function reset_clock() {
 	chrome.tabs.query({'active': true, 'currentWindow': true},
 	function(tabs){
 		urls = tabs[0].url;
 		});
-	if (urls !== localStorage.getItem("savedURL")) {
+	chrome.storage.local.get(["savedURL"], function(data){
+		lastURL = data.savedURL;
+		console.log(lastURL)
+	});
+	chrome.storage.local.get(["savedTime"], function(data) {
+		lastTimestamp = data.savedTime;
+	});
+	if (urls !== lastURL) {
 		startday = new Date();
 		clockStart = startday.getTime();
-		localStorage.setItem("savedTime", clockStart.toString());
-		localStorage.setItem("savedURL", urls);
+		//localStorage.setItem("savedTime", clockStart.toString());
+		//localStorage.setItem("savedURL", urls);
+		chrome.storage.local.set({"savedTime":clockStart.toString()}, function() {
+			console.log('Saved time is ' + clockStart.toString());
+		});
+		chrome.storage.local.set({"savedURL": urls}, function(){
+			console.log('Saved URL is ' + urls);
+		});
 	} else {
-		clockStart = parseInt(localStorage.getItem("savedTime"));
+		clockStart = parseInt(lastTimestamp);
 	}
 }
 
 
 function initStopwatch() {
 	var currentTime = new Date();
-	clockStart = localStorage.getItem("savedTime");
 	return((currentTime.getTime() - clockStart)/1000);
 	}
 

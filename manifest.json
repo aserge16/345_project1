@@ -13,5 +13,5 @@
 		"default_popup": "extension_tab.html",
 		"default_title": "Timer"
 	},
-	"permissions": ["tabs"]
+	"permissions": ["tabs" , "storage"]
 }
