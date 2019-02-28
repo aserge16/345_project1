@@ -1,3 +1,11 @@
+//if (localStorage.getItem("savedTime") === null || localStorage.getItem("savedURL") != urls) {
+//	startday = new Date();
+//	clockStart = startday.getTime();
+//	localStorage.setItem("savedTime", clockStart.toString());
+//} else {
+//	clockStart = parseInt(localStorage.getItem("savedTime"))
+//};
+
 var urls;
 var lastTimestamp;
 var lastURL;
@@ -19,19 +27,30 @@ function clock() {
 	var iMins = Math.round((tSecs-30)/60);
 	var sSecs ="" + ((iSecs > 9) ? iSecs : "0" + iSecs);
     var sMins ="" + ((iMins > 9) ? iMins : "0" + iMins);
-
+	document.getElementById("timer").innerHTML = sMins+":"+sSecs;
+	//document.getElementById("timer").innerHTML = tSecs
 	chrome.tabs.query({'active': true, 'currentWindow': true},
 	function(tabs){
 		urls = tabs[0].url;
-		});
-
-		document.getElementById("timer").innerHTML = sMins+":"+sSecs;
+        });
 	document.getElementById("test").innerHTML = urls;
-
+	//document.getElementById("test2").innerHTML = localStorage.getItem("savedURL");
+	//time = time+1
+	//localStorage.setItem("savedTime", time.toString())
+	//alert(sMins+":"+sSecs);
 	setTimeout(function () {clock()}, 1000)
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+
+function allTasks() {
 	clock();
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+	//document.getElementById('timer').addEventListener('click', clickHandler);
+	//alert("Hello world");
+	//reset_clock();
+	allTasks();
   });
 

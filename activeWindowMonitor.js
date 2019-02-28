@@ -3,6 +3,8 @@ chrome.tabs.onUpdated.addListener(setUrl());
 setInterval(resetClock, 1000);
 
 var urls;
+var lastTimestamp;
+var lastURL;
 
 function setUrl(window) {
     startday = new Date();
@@ -21,8 +23,6 @@ function setUrl(window) {
 
 
 function resetClock() {
-	var lastURL;
-	var lastTimestamp;
 	chrome.storage.local.get(["savedURL"], function(data){
 		lastURL = data.savedURL;
 		console.log(lastURL)
@@ -37,6 +37,8 @@ function resetClock() {
 	if (urls !== lastURL) {
 		startday = new Date();
 		clockStart = startday.getTime();
+		//localStorage.setItem("savedTime", clockStart.toString());
+		//localStorage.setItem("savedURL", urls);
 		chrome.storage.local.set({"savedTime":clockStart.toString()}, function() {
 			console.log('Saved time is ' + clockStart.toString());
 		});
