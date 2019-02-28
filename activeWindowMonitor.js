@@ -43,5 +43,19 @@ function resetClock() {
 		chrome.storage.local.set({"savedURL": urls}, function(){
 			console.log('Saved URL is ' + urls);
 		});
+	} else {
+		var currentTime = new Date();
+		clockStart = parseInt(lastTimestamp);
+		var tSecs = Math.round((currentTime.getTime() - clockStart)/1000);
+		var iMins = Math.round((tSecs-30)/60);
+		if (iMins > 0) {
+			var answer = window.confirm("Page has been open longer than 30 minutes, would you like to quit now?");
+			if (answer){
+				chrome.tabs.query({'active': true, 'currentWindow': true}, 
+				function(tabs){
+					chrome.tabs.remove(tabs[0].id);
+					});
+			}
+		}
 	}
 }
