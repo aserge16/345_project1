@@ -55,6 +55,7 @@ function resetClock() {
 				function(tabs){
 					chrome.tabs.remove(tabs[0].id);
 					});
+				setUrl();
 			}
 		}
 	}
