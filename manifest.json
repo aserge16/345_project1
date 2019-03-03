@@ -1,23 +1,12 @@
 {
-	"name" : "TimerExtension",
-	"version": "1.0",
-	"manifest_version": 2,
-	"content_security_policy": "script-src 'self'; object-src 'self'",
-	"content_scripts" : [
-		{
-			"matches" : ["<all_urls>"],
-			"js": ["timer.js"]
-		}
-	],
-	"browser_action" : {
-		// "default_popup": "extension_tab.html",
-		"default_title": "Timer"
-	},
-	"permissions": ["tabs" , "storage"],
-	"background": {
-		"scripts": [
-			"activeWindowMonitor.js"
-		],
-		"persistents" : false
-	}
+    "name" : "TimerExtension",
+    "version": "1.0",
+    "manifest_version": 2,
+    "permissions": ["storage"],
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["event.js"]
+        }
+    ]
 }
