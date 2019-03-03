@@ -7,7 +7,7 @@ function timer() {
     var currentTime = new Date();
     var tSecs = Math.round((currentTime.getTime() - clockStart)/1000);
     var iMins = Math.round((tSecs-30)/60);
-    if iMins == 0{
+    if (iMins == 0){
         timer()
     } else {
         var answer = window.confirm(	urls +" has been open longer than 30 minutes, would you like to quit now?");
@@ -18,16 +18,17 @@ function timer() {
         }
     }
 }
+
 function util(cur,last){
     if (cur == last || last == null){
         alert(last);
     } else {
         alert("False");
     };
-};
+}
 
-func setTime() {
+function setTime() {
     var startTime = new Date();
     var clockStart = startTime.getTime();
-    sessionStorage.setItem("savedTime" : clockStart.toString())
+    sessionStorage.setItem("savedTime", clockStart.toString())
 }
