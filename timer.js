@@ -28,7 +28,14 @@ function clock() {
 	setTimeout(function () {clock()}, 1000)
 }
 
+function store_delay(){
+	var delay_time = parseInt(document.getElementById('amount').value);
+	sessionStorage.setItem("savedDelay", delay_time);
+	document.getElementById('amount').value = "";
+}
 
 document.addEventListener('DOMContentLoaded', function () {
 	clock();
-  });
+	var button = document.getElementById("submit_button");
+	button.addEventListener('click', store_delay);
+});
