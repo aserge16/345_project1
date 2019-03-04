@@ -29,7 +29,7 @@ function clock() {
 }
 
 function store_delay(){
-	var delay_time = parseInt(document.getElementById('amount').value);
+	var delay_time = document.getElementById('amount').value;
 	sessionStorage.setItem("savedDelay", delay_time);
 	document.getElementById('amount').value = "";
 }
