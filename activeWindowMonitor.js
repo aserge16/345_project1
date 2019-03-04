@@ -7,6 +7,7 @@ function timer() {
     clockStart = parseInt(lastTimeStamp);
     var currentTime = new Date();
     var tSecs = Math.round((currentTime.getTime() - clockStart)/1000);
+<<<<<<< HEAD
     var iMins = Math.floor(tSecs/60);
     //alert(tSecs)
     if (tSecs > 5){
@@ -18,13 +19,14 @@ function timer() {
         }
     }
 }
+
 function util(cur,last){
     if (cur == last || last == null){
         alert(last);
     } else {
         alert("False");
     };
-};
+}
 
 function setTime() {
     var startTime = new Date();
@@ -34,4 +36,4 @@ function setTime() {
 
 function closeCurrentWindow() {
     window.close();
-  }
+}
