@@ -1,3 +1,6 @@
+// WORK IN PROGRESS
+// Implimentation of interval clock for user benefit
+
 function initStopwatch() {
 	var currentTime = new Date();
 	var lastTimestamp = sessionStorage.getItem("savedTime");
