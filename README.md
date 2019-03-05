@@ -7,3 +7,5 @@
 # 3. Load unpacked and direct to the directory containing all files
 
 # The extension should now be visible as a small square at the top right of Chrome. Reload Chrome.
+
+# To see the closing tab functionality immediately, set time delay to 0
