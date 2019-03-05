@@ -7,8 +7,3 @@ document.addEventListener("DOMContentLoaded", function(){
         });
     });
 })
-// function updateTime(){
-//     var minute = document.getElementById('Timer').value;
-//     sessionStorage.setItem("savedDelay", minute);
-//     sessionStorage.setItem("clicked", "true");
-// }
