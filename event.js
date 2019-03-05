@@ -29,6 +29,7 @@ function timer(minute) {
         }
     }
 }
+
 function util(cur,last){
     if (cur == last || last == null){
         alert(last);

@@ -1,8 +1,6 @@
-var lastTimestamp;
-
 function initStopwatch() {
 	var currentTime = new Date();
-	lastTimestamp = sessionStorage.getItem("savedTime");
+	var lastTimestamp = sessionStorage.getItem("savedTime");
 	clockStart = parseInt(lastTimestamp);
 	return((currentTime.getTime() - clockStart)/1000);
 }
