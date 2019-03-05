@@ -1,28 +1,36 @@
-// if (document.getElementById('timeSubmission') == null){
-//     window.onload = setTime;
-//     setInterval(timer, 1000);
-//     }
-// document.getElementById('timeSubmission').onclick = reset();
-var minute;
-var defaultId;
-var clicker;
-setTime();
-function checkClick(){
-    clicker = sessionStorage.getItem('clicked');
-    if (clicker == null){
-        // defaultId = setInterval(function(){ timer(40);}, 1000);
-        // alert("null");
-        timer(10);
-    } else if (clicker == 'true'){
-        minute = parseInt(sessionStorage.getItem('savedDelay'));
-        // clearInterval(defaultId);
-        // setInterval(function(){ timer(minute)},1000);
-        // alert(clicker)
-        timer(minute)
-    }
-}
-setInterval(function(){checkClick()},1000);
 
+// var minute;
+// var defaultId;
+// var clicker;
+// setTime();
+// function checkClick(){
+//     clicker = sessionStorage.getItem('clicked');
+
+//     if (clicker == null){
+//         //alert(clicker)
+//         timer(30);
+//     } else if (clicker == 'true'){
+//         minute = parseInt(sessionStorage.getItem('savedDelay'));
+//         // clearInterval(defaultId);
+//         // setInterval(function(){ timer(minute)},1000);
+//         alert(clicker)
+//         timer(minute)
+//     }
+// }
+// setInterval(function(){checkClick()},1000);
+
+setTime()
+var defaultID = setInterval(function(){timer(10)}, 1000);
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse){
+        clearInterval(defaultID);
+        if (request.click == "True"){
+            setTime();
+            minute = parseInt(request.time);
+            defaultID = setInterval(function(){timer(minute), 1000});
+        }
+    }
+)
 
 function timer(minute) {
     var urls = window.location.href;
@@ -37,7 +45,7 @@ function timer(minute) {
         if (answer){
             chrome.runtime.sendMessage("close");
         } else {
-            setTime();
+            setTime()
         }
     }
 }
