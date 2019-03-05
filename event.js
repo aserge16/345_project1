@@ -40,5 +40,5 @@ function util(cur,last){
 function setTime() {
     var startTime = new Date();
     var clockStart = startTime.getTime();
-    sessionStorage.setItem("savedTime", clockStart.toString())
+    sessionStorage.setItem("savedTime", clockStart.toString());
 }
